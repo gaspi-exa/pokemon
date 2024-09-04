@@ -19,7 +19,6 @@ class Form {
     this.$isRegistered = isRegistered;
     this.$inputsQuantity = this.$isRegistered ? 2 : 3;
     this.createForm();
-    // this.isValidForm();
   }
 
   createForm = () => {
@@ -107,7 +106,7 @@ class Form {
 
   setAction = (action) => {
     this.$action = action;
-  };
+  }; 
 
   getform = () => {
     return this.$form;
