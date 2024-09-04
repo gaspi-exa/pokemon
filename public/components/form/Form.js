@@ -21,6 +21,7 @@ class Form {
     if (this.$userStatus === EUserStatus.LOGGED_OUT) {
       const input = new Input();
       input.setPlaceholder("USER");
+      input.setErrors([""]);
       this.$form.appendChild(input.getInput());
 
       const input2 = new Input();

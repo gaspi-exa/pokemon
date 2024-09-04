@@ -4,6 +4,7 @@ class Input {
   $input = document.createElement("input");
   $placeholder = "";
   $type = "text";
+  $errors = [];
 
   constructor() {
     useStyles(this.$input, input);
@@ -28,12 +29,20 @@ class Input {
   getInput = () => {
     return this.$input;
   };
+
+  setErrors = (errors) => {
+    this.$errors = errors;
+    if (errors?.length) {
+      this.$input.classList.add("error");
+      return;
+    }
+    this.$input.classList.remove("error");
+  };
 }
 
 const input = {
   height: "50px",
   background: "rgba(0, 0, 0, .5)",
-  border: "none",
   outline: "none",
   marginBottom: "10px",
   textAlign: "center",
