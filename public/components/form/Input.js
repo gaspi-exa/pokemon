@@ -5,6 +5,7 @@ class Input {
   $placeholder = "";
   $type = "text";
   $errors = [];
+  $valid = true;
 
   constructor() {
     useStyles(this.$input, input);
@@ -34,9 +35,19 @@ class Input {
     this.$errors = errors;
     if (errors?.length) {
       this.$input.classList.add("error");
+      this.setValid(false);
       return;
     }
     this.$input.classList.remove("error");
+    this.setValid(true);
+  };
+
+  setValid = (valid) => {
+    this.$valid = valid;
+  };
+
+  isValid = () => {
+    return this.$valid;
   };
 }
 

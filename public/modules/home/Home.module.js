@@ -26,7 +26,7 @@ class HomeModule {
         );
       }
 
-      const form = new Form(EUserStatus.LOGGED_OUT, true);
+      const form = new Form(EUserStatus.LOGGED_OUT, false);
       form.setAction("http://localhost/_TP_2024/server/api/login");
       arena.getArena().appendChild(form.getform());
 
