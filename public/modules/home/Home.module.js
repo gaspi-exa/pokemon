@@ -1,7 +1,9 @@
 import Backdrop from "../../components/Backdrop.js";
 import Arena from "../../components/Arena.js";
 import EPokemon from "../../constants/pokemon.js";
-import EModules from "../../constants/modules.js";
+// import EModules from "../../constants/modules.js";
+import Form from "../../components/form/Form.js";
+import EUserStatus from "../../constants/user-status.js";
 
 class HomeModule {
   $pokemonsList = [];
@@ -24,9 +26,13 @@ class HomeModule {
         );
       }
 
-      arena.getArena().onclick = () => {
-        window.open(EModules.ADMIN, "_self");
-      };
+      const form = new Form(EUserStatus.LOGGED_OUT);
+      form.setAction("http://localhost/_TP_2024/server/api/login");
+      arena.getArena().appendChild(form.getform());
+
+      // arena.getArena().onclick = () => {
+      //   window.open(EModules.ADMIN, "_self");
+      // };
 
       this.$root.appendChild(backdrop.getbackdrop());
       this.$root.appendChild(arena.getArena());
