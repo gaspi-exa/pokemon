@@ -19,6 +19,7 @@ class Form {
     this.$isRegistered = isRegistered;
     this.$inputsQuantity = this.$isRegistered ? 2 : 3;
     this.createForm();
+    // this.isValidForm();
   }
 
   createForm = () => {
@@ -42,7 +43,9 @@ class Form {
             break;
         }
         input.getInput().oninput = (event) => {
-          input.setValid(true);
+          if (!input.isValid()) {
+            input.setValid(true);
+          }
         };
         this.$form.appendChild(input.getInput());
       });
@@ -79,7 +82,9 @@ class Form {
 
   onLogIn = (event) => {
     event.preventDefault();
-    window.open(EModules.ADMIN, "_self");
+    if (this.isValidForm()) {
+      window.open(EModules.ADMIN, "_self");
+    }
   };
 
   onLogOut = (event) => {
@@ -88,19 +93,15 @@ class Form {
   };
 
   isValidForm = () => {
-    let isValid = false;
-    try {
-      this.$inputs.forEach((input) => {
-        if (!input.isValid() || !input.getInput().value.trim()) {
-          input.setErrors([""]);
-          isValid = false;
-        } else {
-          isValid = true;
-        }
-      });
-    } catch (error) {
-      isValid = false;
-    }
+    let isValid = true;
+  
+    this.$inputs.forEach(input => {
+      if (!input.isValid() || !input.getInput().value.trim()) {
+        input.setErrors(['Este campo es obligatorio']);
+        isValid = false;
+      }
+    });
+  
     return isValid;
   };
 
