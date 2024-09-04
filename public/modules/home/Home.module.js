@@ -26,13 +26,9 @@ class HomeModule {
         );
       }
 
-      const form = new Form(EUserStatus.LOGGED_OUT);
+      const form = new Form(EUserStatus.LOGGED_OUT, true);
       form.setAction("http://localhost/_TP_2024/server/api/login");
       arena.getArena().appendChild(form.getform());
-
-      // arena.getArena().onclick = () => {
-      //   window.open(EModules.ADMIN, "_self");
-      // };
 
       this.$root.appendChild(backdrop.getbackdrop());
       this.$root.appendChild(arena.getArena());
