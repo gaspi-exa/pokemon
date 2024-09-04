@@ -28,19 +28,22 @@ class Form {
         this.$inputs.push(new Input());
       }
       this.$inputs.map((input, index) => {
-        let placeholder;
         switch (index) {
           case 0:
-            placeholder = "USER";
+            input.setPlaceholder("USER");
             break;
           case 1:
-            placeholder = "PASSWORD";
+            input.setPlaceholder("PASSWORD");
+            input.setType("password");
             break;
           case 2:
-            placeholder = "REPEAT PASSWORD";
+            input.setPlaceholder("REPEAT PASSWORD");
+            input.setType("password");
             break;
         }
-        input.setPlaceholder(placeholder);
+        input.getInput().oninput = (event) => {
+          input.setValid(true);
+        };
         this.$form.appendChild(input.getInput());
       });
 
@@ -69,17 +72,6 @@ class Form {
 
   onSignUp = (event) => {
     event.preventDefault();
-    /**
-     * start Testing
-     */
-    this.$inputs.forEach((input, index) => {
-      if (index === 1 || index === 2) {
-        input.setValid(false);
-      }
-    });
-    /**
-     * end Testing
-     */
     if (this.isValidForm()) {
       window.open(EModules.ADMIN, "_self");
     }
@@ -99,7 +91,7 @@ class Form {
     let isValid = false;
     try {
       this.$inputs.forEach((input) => {
-        if (!input.isValid()) {
+        if (!input.isValid() || !input.getInput().value.trim()) {
           input.setErrors([""]);
           isValid = false;
         } else {

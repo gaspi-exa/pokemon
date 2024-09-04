@@ -44,6 +44,11 @@ class Input {
 
   setValid = (valid) => {
     this.$valid = valid;
+    if (!this.$valid) {
+      this.$input.classList.add("error");
+      return;
+    }
+    this.$input.classList.remove("error");
   };
 
   isValid = () => {
