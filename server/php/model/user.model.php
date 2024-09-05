@@ -15,28 +15,28 @@ class UserModel
 
     public function getAllUsers()
     {
-        $query = $this->db->prepare('SELECT * FROM users');
+        $query = $this->db->prepare('SELECT * FROM user');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getUserByID($user_id)
     {
-        $query = $this->db->prepare("SELECT * FROM users WHERE user_id=?");
+        $query = $this->db->prepare("SELECT * FROM user WHERE user_id=?");
         $query->execute(array($user_id));
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     public function getUser($userName)
     {
-        $query = $this->db->prepare("SELECT * FROM users WHERE name=?");
+        $query = $this->db->prepare("SELECT * FROM user WHERE name=?");
         $query->execute(array($userName));
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     public function createUser($name, $email, $password, $clearence)
     {
-        $query = $this->db->prepare('INSERT INTO users(name, email, password, clearence) VALUES(?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO user(name, email, password, clearence) VALUES(?, ?, ?, ?)');
         $query->execute(array($name, $email, $password, $clearence));
     }
 
@@ -44,13 +44,13 @@ class UserModel
 
     public function updateUserClearence($user_id, $clearence)
     {
-        $query = $this->db->prepare('UPDATE users SET clearence=? WHERE user_id=?');
+        $query = $this->db->prepare('UPDATE user SET clearence=? WHERE user_id=?');
         $query->execute(array($clearence, $user_id));
     }
 
     public function deleteUser($user_id)
     {
-        $query = $this->db->prepare('DELETE FROM users WHERE user_id=?');
+        $query = $this->db->prepare('DELETE FROM user WHERE user_id=?');
         $query->execute(array($user_id));
     }
 
@@ -58,21 +58,21 @@ class UserModel
 
     public function deleteUserFromAPI($user_id)
     {
-        $query = $this->db->prepare("DELETE FROM users WHERE user_id=?");
+        $query = $this->db->prepare("DELETE FROM user WHERE user_id=?");
         $query->execute(array($user_id));
         return $query->rowCount();
     }
 
     public function updateUserFromAPI($name, $email, $password, $clearence, $id)
     {
-        $query = $this->db->prepare('UPDATE users SET name=?, email=?, password=?, clearence=? WHERE user_id=?');
+        $query = $this->db->prepare('UPDATE user SET name=?, email=?, password=?, clearence=? WHERE user_id=?');
         $query->execute(array($name, $email, $password, $clearence, $id));
         return $query->rowCount();
     }
 
     public function addUserFromAPI($name, $email, $password, $clearence)
     {
-        $query = $this->db->prepare('INSERT INTO users(name, email, password, clearence) VALUES(?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO user(name, email, password, clearence) VALUES(?, ?, ?, ?)');
         $query->execute(array($name, $email, $password, $clearence));
         return $this->db->lastInsertId();
     }

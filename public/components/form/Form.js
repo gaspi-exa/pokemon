@@ -90,14 +90,30 @@ class Form {
     }
   };
 
-  // onSignUp = (event) => {
-  //   // event.preventDefault();
-  //   console.log(event);
-  //   if (this.isValidForm()) {
-  //     // window.open(EModules.ADMIN, "_self");
-  //     // window.open("verify", "_self");
-  //   }
-  // };
+  onSignUp = (event) => {
+    /**
+    event.preventDefault();
+    if (this.isValidForm()) {
+      fetch("http://localhost/_TP_2024/server/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: this.$inputs[0].getInput().value,
+          email: this.$inputs[1].getInput().value,
+          password: this.$inputs[2].getInput().value,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data);
+          window.open(EModules.ADMIN, "_self");
+          // window.open("verify", "_self");
+        });
+    }
+    */
+  };
 
   onLogIn = (event) => {
     event.preventDefault();
@@ -145,7 +161,7 @@ const form = {
   alignItems: "center",
   justifyContent: "center",
   height: "100dvh",
-  background: "rgba(0, 0, 0, .5)",
+  background: "rgba(0, 0, 0, .7)",
 };
 
 export default Form;

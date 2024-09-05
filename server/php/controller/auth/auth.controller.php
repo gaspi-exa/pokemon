@@ -27,12 +27,12 @@ class AuthController
 
     public function createUser()
     {
-        
+
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $clearence = 'null';
-        if (!$this->isValidForm()) {
+        if (isset($name) && !empty($name) && isset($email) && !empty($email) && isset($password) && !empty($password)) {
             $name = strtoupper($name);
             $encriptedPass = password_hash($password, PASSWORD_DEFAULT);
 

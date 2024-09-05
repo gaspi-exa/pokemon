@@ -1,5 +1,5 @@
 import Backdrop from "../../components/Backdrop.js";
-import Arena from "../../components/Arena.js";
+import Arena from "../../components/arena/Arena.js";
 import EPokemon from "../../constants/pokemon.js";
 import Form from "../../components/form/Form.js";
 import EUserStatus from "../../constants/user-status.js";
@@ -17,20 +17,26 @@ class HomeModule {
       this.setPokemonsList(next);
 
       if (this.$pokemonsList?.length) {
+        // backdrop
         const backdrop = new Backdrop();
         backdrop.setImage(
           this.$pokemonsList.find((pok) => pok.name === EPokemon.MEWTWO)?.url
         );
         this.$root.appendChild(backdrop.getbackdrop());
 
+        // Arena Pokemon
         const arena = new Arena();
-        const form = new Form(EUserStatus.LOGGED_OUT, false);
-        form.setAction("signup");
-        form.setMethod("post");
-        arena.getArena().appendChild(form.getform());
-        console.log(form)
-
         this.$root.appendChild(arena.getArena());
+
+        // auth form
+        /**
+         * 
+        const form = new Form(EUserStatus.LOGGED_OUT, false);
+        form.setAction("login");
+        form.setMethod("post");
+
+        this.$root.appendChild(form.getform());
+         */
       }
     });
   };

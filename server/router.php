@@ -17,12 +17,12 @@ $r->addRoute('home', 'GET', 'PokemonController', 'getPokemons');
 $r->addRoute('admin', 'GET', 'AdminController', 'getPokemons');
 
 // AUTHORIZATION
-$r->addRoute('signup', 'POST', 'AuthController', 'createUser');
+$r->addRoute('login', 'POST', 'AuthController', 'createUser');
 
 // $r->addRoute('signup', 'GET', 'AuthController', 'getSignup');
-$r->addRoute('login', 'GET', 'AuthController', 'getLogin');
-$r->addRoute('logout', 'GET', 'AuthHelper', 'logOut');
-$r->addRoute('welcome', 'POST', 'AuthController', 'verifyUser');
+// $r->addRoute('login', 'GET', 'AuthController', 'getLogin');
+// $r->addRoute('logout', 'GET', 'AuthHelper', 'logOut');
+// $r->addRoute('welcome', 'POST', 'AuthController', 'verifyUser');
 
 // DEFAULT
 $r->setDefaultRoute('PokemonController', 'getPokemons');
