@@ -4,6 +4,7 @@ class Button {
   $button = document.createElement("button");
   $type;
   $text;
+  $mode = "primary";
 
   constructor() {
     useStyles(this.$button, button);
@@ -13,6 +14,7 @@ class Button {
   setAttributes = () => {
     this.$button.type = this.$type;
     this.$button.innerHTML = this.$text;
+    this.$button.classList.add(this.$mode);
   };
 
   setType = (type) => {
@@ -25,6 +27,11 @@ class Button {
     this.setAttributes();
   };
 
+  setMode = (mode) => {
+    this.$mode = mode;
+    this.setAttributes();
+  };
+
   getButton = () => {
     return this.$button;
   };
@@ -32,7 +39,8 @@ class Button {
 
 const button = {
   height: "50px",
-  background: "rgba(0, 0, 0, .5)",
+  background: "rgba(255, 255, 255, .8)",
+  color: "black",
   border: "1px solid gray",
   outline: "none",
   textAlign: "center",

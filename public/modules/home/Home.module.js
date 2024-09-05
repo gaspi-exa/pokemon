@@ -24,9 +24,11 @@ class HomeModule {
         this.$root.appendChild(backdrop.getbackdrop());
 
         const arena = new Arena();
-        const form = new Form(EUserStatus.LOGGED_IN, false);
-        // form.setAction("http://localhost/_TP_2024/server/api/pokemons/");
+        const form = new Form(EUserStatus.LOGGED_OUT, false);
+        form.setAction("signup");
+        form.setMethod("post");
         arena.getArena().appendChild(form.getform());
+        console.log(form)
 
         this.$root.appendChild(arena.getArena());
       }

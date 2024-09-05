@@ -6,6 +6,7 @@ class Input {
   $type = "text";
   $errors = [];
   $valid = true;
+  $name;
 
   constructor() {
     useStyles(this.$input, input);
@@ -15,10 +16,16 @@ class Input {
   setAttributes = () => {
     this.$input.type = this.$type;
     this.$input.placeholder = this.$placeholder;
+    this.$input.name = this.$name;
   };
 
   setType = (type) => {
     this.$type = type;
+    this.setAttributes();
+  };
+  
+  setName = (name) => {
+    this.$name = name;
     this.setAttributes();
   };
 

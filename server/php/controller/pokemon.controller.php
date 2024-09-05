@@ -10,7 +10,7 @@ class PokemonController
     private $view;
     private $allPokemons;
 
-    function __construct()
+    public function __construct()
     {
         $this->model = new PokemonModel();
         $this->view = new PokemonView();
@@ -19,12 +19,12 @@ class PokemonController
     }
 
 
-    function getPokemons()
+    public function getPokemons()
     {
         return $this->model->getPokemons();
     }
 
-    function getHome()
+    public function getHome()
     {
         $this->view->renderHome($this->allPokemons, "public");
     }

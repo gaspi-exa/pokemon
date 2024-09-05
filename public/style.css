@@ -34,3 +34,17 @@ button {
 input.error {
   border: 1px solid red;
 }
+
+.secondary {
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: #fff !important;
+  height: auto !important;
+  font-size: 1em !important;
+}
+
+.btn-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 2em;
+}

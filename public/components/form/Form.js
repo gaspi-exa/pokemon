@@ -9,6 +9,7 @@ class Form {
   $userStatus;
   $isRegistered = false;
   $action;
+  $method;
 
   $inputs = [];
   $inputsQuantity = 0;
@@ -17,7 +18,7 @@ class Form {
   constructor(userStatus, isRegistered) {
     this.$userStatus = userStatus;
     this.$isRegistered = isRegistered;
-    this.$inputsQuantity = this.$isRegistered ? 2 : 3;
+    this.$inputsQuantity = this.$isRegistered ? 2 : 4;
     this.createForm();
   }
 
@@ -31,12 +32,19 @@ class Form {
         switch (index) {
           case 0:
             input.setPlaceholder("USER");
+            input.setName("name");
             break;
           case 1:
-            input.setPlaceholder("PASSWORD");
-            input.setType("password");
+            input.setPlaceholder("EMAIL");
+            input.setType("email");
+            input.setName("email");
             break;
           case 2:
+            input.setPlaceholder("PASSWORD");
+            input.setType("password");
+            input.setName("password");
+            break;
+          case 3:
             input.setPlaceholder("REPEAT PASSWORD");
             input.setType("password");
             break;
@@ -44,21 +52,31 @@ class Form {
         input.getInput().oninput = (event) => {
           if (!input.isValid()) {
             input.setValid(true);
+            input.getInput().value = event;
           }
         };
         this.$form.appendChild(input.getInput());
       });
 
+      const buttonsSection = document.createElement("section");
       this.$buttons.push(new Button());
-      this.$buttons.map((button) => {
-        button.setType(this.$buttons.length === 1 ? "submit" : "button");
-        button.setText(!this.$isRegistered ? "CREATE" : "LOG IN");
-        this.$form.appendChild(button.getButton());
+      this.$buttons.push(new Button());
+      this.$buttons.map((button, index) => {
+        if (index === 0) {
+          button.setType("submit");
+          button.setText(!this.$isRegistered ? "CREATE USER" : "LOG IN");
+        } else if (index === 1) {
+          button.setText(!this.$isRegistered ? "LOG IN" : "SIGN UP");
+          button.setMode("secondary");
+        }
+        buttonsSection.classList.add("btn-container");
+        buttonsSection.appendChild(button.getButton());
       });
+      this.$form.appendChild(buttonsSection);
 
-      this.$form.onsubmit = (event) => {
-        this.$isRegistered ? this.onLogIn(event) : this.onSignUp(event);
-      };
+      // this.$form.onsubmit = (event) => {
+      //   this.$isRegistered ? this.onLogIn(event) : this.onSignUp(event);
+      // };
       return;
     }
     if (this.$userStatus === EUserStatus.LOGGED_IN) {
@@ -72,12 +90,14 @@ class Form {
     }
   };
 
-  onSignUp = (event) => {
-    event.preventDefault();
-    if (this.isValidForm()) {
-      window.open(EModules.ADMIN, "_self");
-    }
-  };
+  // onSignUp = (event) => {
+  //   // event.preventDefault();
+  //   console.log(event);
+  //   if (this.isValidForm()) {
+  //     // window.open(EModules.ADMIN, "_self");
+  //     // window.open("verify", "_self");
+  //   }
+  // };
 
   onLogIn = (event) => {
     event.preventDefault();
@@ -93,20 +113,26 @@ class Form {
 
   isValidForm = () => {
     let isValid = true;
-  
-    this.$inputs.forEach(input => {
+
+    this.$inputs.forEach((input) => {
       if (!input.isValid() || !input.getInput().value.trim()) {
-        input.setErrors(['Este campo es obligatorio']);
+        input.setErrors(["Este campo es obligatorio"]);
         isValid = false;
       }
     });
-  
+
     return isValid;
   };
 
   setAction = (action) => {
     this.$action = action;
-  }; 
+    this.$form.action = this.$action;
+  };
+
+  setMethod = (method) => {
+    this.$method = method;
+    this.$form.method = this.$method;
+  };
 
   getform = () => {
     return this.$form;

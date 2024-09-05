@@ -15,6 +15,9 @@ class Main {
       case EModules.PUBLIC:
         new HomeModule(this.$root).onInit();
         break;
+      case EModules.PRIVATE:
+        new AdminModule(this.$root).onInit();
+        break;
       case EModules.ADMIN:
         new AdminModule(this.$root).onInit();
         break;
@@ -25,6 +28,7 @@ class Main {
     const roots = [
       document.getElementById(EModules.PUBLIC),
       document.getElementById(EModules.ADMIN),
+      document.getElementById(EModules.PRIVATE),
     ];
     this.$root = roots.find((root) => root !== null);
   };

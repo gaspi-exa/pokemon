@@ -16,4 +16,18 @@ VALUES
   (2, 'gengar', 'https://wallpapers-clan.com/wp-content/uploads/2024/04/pokemon-gengar-cool-red-desktop-wallpaper-preview.jpg'),
   (3, 'mewtwo', 'https://wallpapers-clan.com/wp-content/uploads/2024/04/aesthetic-pokemon-mewtwo-desktop-wallpaper-preview.jpg');
 
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `clearence` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `clearence`) 
+VALUES
+  (1, 'GASPI', 'gaspi.tudai@gmail.com', '$2y$10$d/AcpkdKVEeHr7Cd/uAM/.EYA86EsjR/Noy/avzyB4UkpztWlCuYq', 'admin'),
+  (2, 'LAUTA', 'arielvincennao@hotmail.com', '$2y$10$8Xt2oAL8ZazAXNS5bQxT5eA9lT.myDGgHRrt41BcytlPlqdWvuXHW', 'admin'),
+
 COMMIT;
