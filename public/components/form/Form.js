@@ -78,9 +78,9 @@ class Form {
       });
       this.$form.appendChild(buttonsSection);
 
-      // this.$form.onsubmit = (event) => {
-      //   this.$isRegistered ? this.onLogIn(event) : this.onSignUp(event);
-      // };
+      this.$form.onsubmit = (event) => {
+        this.$isRegistered ? this.onLogIn(event) : this.onSignUp(event);
+      };
       return;
     }
     if (this.$userStatus === EUserStatus.LOGGED_IN) {
@@ -95,28 +95,10 @@ class Form {
   };
 
   onSignUp = (event) => {
-    /**
     event.preventDefault();
     if (this.isValidForm()) {
-      fetch("http://localhost/_TP_2024/server/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: this.$inputs[0].getInput().value,
-          email: this.$inputs[1].getInput().value,
-          password: this.$inputs[2].getInput().value,
-        }),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-          window.open(EModules.ADMIN, "_self");
-          // window.open("verify", "_self");
-        });
+      this.$form.submit();
     }
-    */
   };
 
   onLogIn = (event) => {
