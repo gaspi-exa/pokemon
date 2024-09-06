@@ -105,4 +105,9 @@ class AuthController
     {
         $this->view->renderAuthForm($userName, "login");
     }
+
+    public function showLogOutForm($userName)
+    {
+        $this->view->renderAuthForm($userName, "logout");
+    }
 }

@@ -14,9 +14,10 @@ $r = new Router();
 $r->addRoute('login', 'POST', 'AuthController', 'createUser');
 $r->addRoute('login', 'GET', 'AuthController', 'showLogInForm');
 $r->addRoute('signup', 'GET', 'AuthController', 'showSignUpForm');
+$r->addRoute('logout', 'GET', 'AuthController', 'showLogOutForm');
 
 // PUBLIC
-$r->addRoute('home', 'GET', 'PokemonController', 'getPokemons');
+// $r->addRoute('home', 'GET', 'PokemonController', 'getHome');
 // ADMIN
 $r->addRoute('admin', 'GET', 'AdminController', 'getPokemons');
 // $r->addRoute('signup', 'GET', 'AuthController', 'getSignup');
@@ -25,6 +26,6 @@ $r->addRoute('admin', 'GET', 'AdminController', 'getPokemons');
 // $r->addRoute('welcome', 'POST', 'AuthController', 'verifyUser');
 
 // DEFAULT
-$r->setDefaultRoute('PokemonController', 'getPokemons');
+$r->setDefaultRoute('PokemonController', 'getHome');
 
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);

@@ -1,5 +1,5 @@
 import Success from "../../components/Success.js";
-import EModules from "../../constants/modules.js";
+import EModules from "../../constants/route.js";
 
 class AdminModule {
   $root;

@@ -26,6 +26,6 @@ class PokemonController
 
     public function getHome()
     {
-        $this->view->renderHome($this->allPokemons, "signup");
+        $this->view->renderHome($this->allPokemons, "home");
     }
 }

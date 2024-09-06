@@ -13,25 +13,27 @@ const baseUrlsList = {
 class Pokemon {
   $pokemon = document.createElement("div");
   $src;
+  $url;
   $id;
   $name;
 
-  constructor({ _id, name }) {
+  constructor({ _id, name, url }) {
     useStyles(this.$pokemon, container);
     this.setId(_id);
     this.setName(name);
+    if (url) this.setUrl(url);
     this.onInit();
   }
 
   onInit = () => {
     const imgEl = document.createElement("img");
     useStyles(imgEl, imgStyle);
-    imgEl.src = this.getUrl(EAvatarMode.sprite_gif);
+    imgEl.src = this.getSrcUrl(EAvatarMode.sprite_gif);
     imgEl.alt = this.$name;
     this.$pokemon.appendChild(imgEl);
   };
 
-  getUrl = (mode) => {
+  getSrcUrl = (mode) => {
     const url = baseUrlsList[mode];
     switch (mode) {
       case EAvatarMode.sprite_png:
@@ -65,6 +67,14 @@ class Pokemon {
 
   setSrc = (src) => {
     this.$src = src;
+  };
+
+  setUrl(url) {
+    this.$url = url;
+  }
+
+  getUrl = () => {
+    return this.$url;
   };
 }
 

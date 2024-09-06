@@ -2,7 +2,8 @@ import useStyles from "../../utils/useStyle.js";
 import EUserStatus from "../../constants/user-status.js";
 import Input from "./Input.js";
 import Button from "./Button.js";
-import EModules from "../../constants/modules.js";
+import EModules from "../../constants/route.js";
+import Pokemon from "../pokemon/Pokemon.js";
 
 class Form {
   $form = document.createElement("form");
@@ -24,7 +25,11 @@ class Form {
 
   createForm = () => {
     useStyles(this.$form, form);
-    if (this.$userStatus === EUserStatus.LOGGED_OUT) {
+    this.setBackground();
+    if (
+      this.$userStatus === EUserStatus.LOGGED_OUT ||
+      this.$userStatus === EUserStatus.UNREGISTERED
+    ) {
       for (let i = 0; i < this.$inputsQuantity; i++) {
         this.$inputs.push(new Input());
       }
@@ -35,9 +40,17 @@ class Form {
             input.setName("name");
             break;
           case 1:
-            input.setPlaceholder("EMAIL");
-            input.setType("email");
-            input.setName("email");
+            {
+              if (this.$userStatus === EUserStatus.UNREGISTERED) {
+                input.setPlaceholder("EMAIL");
+                input.setType("email");
+                input.setName("email");
+              } else if (this.$userStatus === EUserStatus.LOGGED_OUT) {
+                input.setPlaceholder("PASSWORD");
+                input.setType("password");
+                input.setName("password");
+              }
+            }
             break;
           case 2:
             input.setPlaceholder("PASSWORD");
@@ -59,8 +72,8 @@ class Form {
       });
 
       const buttonsSection = document.createElement("section");
-      this.$buttons.push(new Button());
-      this.$buttons.push(new Button());
+      const buttons = [new Button(), new Button()];
+      this.$buttons = [...buttons];
       this.$buttons.map((button, index) => {
         if (index === 0) {
           button.setType("submit");
@@ -104,7 +117,8 @@ class Form {
   onLogIn = (event) => {
     event.preventDefault();
     if (this.isValidForm()) {
-      window.open(EModules.ADMIN, "_self");
+      this.$form.submit();
+      // window.open(EModules.ADMIN, "_self");
     }
   };
 
@@ -139,6 +153,17 @@ class Form {
   getform = () => {
     return this.$form;
   };
+
+  setBackground = () => {
+    const pokemon = new Pokemon({
+      _id: 25,
+      name: "pikachu",
+      url: "https://wallpapers-clan.com/wp-content/uploads/2023/11/cute-pokemon-pikachu-rain-desktop-wallpaper-preview.jpg",
+    });
+    this.$form.style.backgroundImage = `url(${pokemon.getUrl()})`;
+    this.$form.style.backgroundSize = "cover";
+    this.$form.style.backgroundPosition = "center";
+  };
 }
 
 const form = {
@@ -147,7 +172,7 @@ const form = {
   alignItems: "center",
   justifyContent: "center",
   height: "100dvh",
-  background: "rgba(0, 0, 0, .7)",
+  // background: "rgba(0, 0, 0, .7)",
 };
 
 export default Form;

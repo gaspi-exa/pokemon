@@ -20,11 +20,6 @@ class HomeModule {
           this.$pokemonsList.find((pok) => pok.name === EPokemon.MEWTWO)?.url
         );
         this.$root.appendChild(backdrop.getbackdrop());
-        /**
-         * 
-        const arena = new Arena(this.$pokemonsList);
-        this.$root.appendChild(arena.getArena());
-        */
       }
     });
   };

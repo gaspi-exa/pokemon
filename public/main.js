@@ -1,8 +1,8 @@
-import EModules from "./constants/modules.js";
+import Route from "./constants/route.js";
 import injectGlobalStyles from "./utils/globalStyles.js";
 import HomeModule from "./modules/home/Home.module.js";
-import FormModule from "./modules/form/Form.module.js";
-// import AdminModule from "./modules/admin/Admin.module.js";
+import AuthModule from "./modules/auth/Auth.module.js";
+import AdminModule from "./modules/admin/Admin.module.js";
 import EUserStatus from "./constants/user-status.js";
 
 injectGlobalStyles();
@@ -14,16 +14,22 @@ class Main {
   onInit = () => {
     this.checkRoots();
     switch (this.$root.id) {
-      case EModules.SIGNUP:
-        new FormModule(this.$root).onInit();
+      case Route.SIGNUP:
+        new AuthModule(this.$root, EUserStatus.UNREGISTERED).onInit();
         break;
-      case EModules.LOGIN:
-        new FormModule(this.$root, EUserStatus.LOGGED_OUT).onInit();
+      case Route.LOGIN:
+        new AuthModule(this.$root, EUserStatus.LOGGED_OUT).onInit();
         break;
-      case EModules.PRIVATE:
+      case Route.LOGOUT:
+        new AuthModule(this.$root, EUserStatus.LOGGED_IN).onInit();
+        break;
+      case Route.HOME:
         new HomeModule(this.$root).onInit();
         break;
-      // case EModules.ADMIN:
+      // case Route.PRIVATE:
+      //   new HomeModule(this.$root).onInit();
+      //   break;
+      // case Route.ADMIN:
       //   new AdminModule(this.$root).onInit();
       //   break;
     }
@@ -31,10 +37,13 @@ class Main {
 
   checkRoots = () => {
     const roots = [
-      document.getElementById(EModules.SIGNUP),
-      document.getElementById(EModules.LOGIN),
-      // document.getElementById(EModules.ADMIN),
-      // document.getElementById(EModules.PRIVATE),
+      document.getElementById(Route.SIGNUP),
+      document.getElementById(Route.LOGIN),
+      document.getElementById(Route.LOGOUT),
+      document.getElementById(Route.HOME),
+
+      document.getElementById(Route.ADMIN),
+      document.getElementById(Route.PRIVATE),
     ];
     this.$root = roots.find((root) => root !== null);
   };
