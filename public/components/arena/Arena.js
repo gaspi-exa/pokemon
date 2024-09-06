@@ -12,8 +12,11 @@ class Arena {
   }
 
   onInit = () => {
-    this.$pokemonsList.map((_pokemon) => {
+    this.$pokemonsList.map((_pokemon, index) => {
       const pokemon = new Pokemon(_pokemon);
+      if (index % 2 === 0) {
+        pokemon.invert();
+      }
       this.$arena.appendChild(pokemon.getPokemon());
     });
   };
@@ -35,11 +38,6 @@ const arenaContainer = {
   gridTemplateColumns: "repeat(10, 1fr)",
   gridTemplateRows: "repeat(16, 1fr)",
   gap: "10px",
-};
-
-const _img = {
-  width: "100px",
-  height: "100px",
 };
 
 export default Arena;

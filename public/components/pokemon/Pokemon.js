@@ -1,4 +1,5 @@
 import useStyles from "../../utils/useStyle.js";
+import EAvatarMode from "../../constants/avatar-mode.js";
 
 const baseUrlsList = {
   sprite_png:
@@ -16,33 +17,38 @@ class Pokemon {
   $name;
 
   constructor({ _id, name }) {
-    useStyles(this.$pokemon, _);
+    useStyles(this.$pokemon, container);
     this.setId(_id);
     this.setName(name);
     this.onInit();
   }
 
   onInit = () => {
-    const img = document.createElement("img");
-    img.src = this.getUrl("other");
-    img.alt = this.$name;
-    this.$pokemon.appendChild(img);
+    const imgEl = document.createElement("img");
+    useStyles(imgEl, imgStyle);
+    imgEl.src = this.getUrl(EAvatarMode.sprite_gif);
+    imgEl.alt = this.$name;
+    this.$pokemon.appendChild(imgEl);
   };
 
   getUrl = (mode) => {
     const url = baseUrlsList[mode];
     switch (mode) {
-      case "sprite_png":
+      case EAvatarMode.sprite_png:
         return `${url}${this.$id}.png`;
-      case "sprite_gif":
-        return `${url}${this.$name}.gif`;
-      case "png_normal":
+      case EAvatarMode.sprite_gif:
+        return `${url}${this.$name.replace("-", "")}.gif`;
+      case EAvatarMode.png_normal:
         return `${url}${this.$name}.png`;
-      case "png_shiny":
+      case EAvatarMode.png_shiny:
         return `${url}${this.$name}.png`;
-      case "other":
+      case EAvatarMode.other:
         return `${url}${String(this.$id).padStart(3, "0")}.png`;
     }
+  };
+
+  invert = () => {
+    this.$pokemon.style.transform = "scaleX(-1)";
   };
 
   getPokemon = () => {
@@ -62,6 +68,13 @@ class Pokemon {
   };
 }
 
-const _ = {};
+const container = {
+  width: "50px",
+  height: "50px",
+};
+
+const imgStyle = {
+  height: "100%",
+};
 
 export default Pokemon;
