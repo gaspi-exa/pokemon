@@ -25,7 +25,7 @@ class HomeModule {
         this.$root.appendChild(backdrop.getbackdrop());
 
         // Arena Pokemon
-        const arena = new Arena();
+        const arena = new Arena(this.$pokemonsList);
         this.$root.appendChild(arena.getArena());
 
         // auth form

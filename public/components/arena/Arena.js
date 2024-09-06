@@ -3,17 +3,23 @@ import Pokemon from "../pokemon/Pokemon.js";
 
 class Arena {
   $arena = document.createElement("div");
+  $pokemonsList = [];
 
-  constructor() {
+  constructor(pokemonsList) {
     useStyles(this.$arena, arenaContainer);
+    this.setPokemonsList(pokemonsList);
     this.onInit();
   }
 
   onInit = () => {
-    for (let i = 1; i <= 151; i++) {
-      const pokemon = new Pokemon(i);
+    this.$pokemonsList.map((_pokemon) => {
+      const pokemon = new Pokemon(_pokemon);
       this.$arena.appendChild(pokemon.getPokemon());
-    }
+    });
+  };
+
+  setPokemonsList = (pokemonsList) => {
+    this.$pokemonsList = pokemonsList;
   };
 
   getArena = () => {
@@ -25,6 +31,10 @@ const arenaContainer = {
   width: "100%",
   height: "100dvh",
   background: "rgba(0, 0, 0, .5)",
+  display: "grid",
+  gridTemplateColumns: "repeat(10, 1fr)",
+  gridTemplateRows: "repeat(16, 1fr)",
+  gap: "10px",
 };
 
 const _img = {
