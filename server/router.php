@@ -10,15 +10,15 @@ define('ADMIN', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] .
 
 $r = new Router();
 
-// PUBLIC
-$r->addRoute('home', 'GET', 'PokemonController', 'getPokemons');
-
-// ADMIN
-$r->addRoute('admin', 'GET', 'AdminController', 'getPokemons');
-
 // AUTHORIZATION
 $r->addRoute('login', 'POST', 'AuthController', 'createUser');
+$r->addRoute('login', 'GET', 'AuthController', 'showLogInForm');
+$r->addRoute('signup', 'GET', 'AuthController', 'showSignUpForm');
 
+// PUBLIC
+$r->addRoute('home', 'GET', 'PokemonController', 'getPokemons');
+// ADMIN
+$r->addRoute('admin', 'GET', 'AdminController', 'getPokemons');
 // $r->addRoute('signup', 'GET', 'AuthController', 'getSignup');
 // $r->addRoute('login', 'GET', 'AuthController', 'getLogin');
 // $r->addRoute('logout', 'GET', 'AuthHelper', 'logOut');

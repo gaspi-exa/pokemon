@@ -12,7 +12,7 @@ class UserView
         $this->smarty = new Smarty();
     }
 
-    public function renderWelcomeHome($userName, $root)
+    public function renderAuthForm($userName, $root)
     {
         $this->smarty->assign('userName', $userName);
         $this->smarty->assign('root', $root);

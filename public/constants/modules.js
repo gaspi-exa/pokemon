@@ -1,5 +1,6 @@
 const EModules = {
-  PUBLIC: "public",
+  SIGNUP: "signup",
+  LOGIN: "login",
   ADMIN: "admin",
   PRIVATE: "private",
 };

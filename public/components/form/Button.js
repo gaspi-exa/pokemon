@@ -2,7 +2,7 @@ import useStyles from "../../utils/useStyle.js";
 
 class Button {
   $button = document.createElement("button");
-  $type;
+  $type = "button";
   $text;
   $mode = "primary";
 

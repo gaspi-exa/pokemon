@@ -66,8 +66,12 @@ class Form {
           button.setType("submit");
           button.setText(!this.$isRegistered ? "CREATE USER" : "LOG IN");
         } else if (index === 1) {
-          button.setText(!this.$isRegistered ? "LOG IN" : "SIGN UP");
           button.setMode("secondary");
+          button.setText(!this.$isRegistered ? "LOG IN" : "SIGN UP");
+          button.getButton().onclick = (e) => {
+            e.preventDefault();
+            window.open(!this.$isRegistered ? "login" : "signup", "_self");
+          };
         }
         buttonsSection.classList.add("btn-container");
         buttonsSection.appendChild(button.getButton());

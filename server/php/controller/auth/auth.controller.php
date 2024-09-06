@@ -11,9 +11,6 @@ class AuthController
     private $model;
     private $view;
     private $allUsers;
-    private $allTickets;
-    private $ticketsData;
-    private $quantityTicketsByCategory;
     private $userName;
 
 
@@ -46,17 +43,12 @@ class AuthController
             $this->userName = $name;
             session_start();
             $_SESSION['NAME'] = $name;
-            $this->getWelcomeUser($name);
+            $this->showLogInForm($name);
             echo 'User created';
             return;
         }
         echo 'Input is empty!';
         $this->getSignup('Input is empty!');
-    }
-
-    public function isValidForm()
-    {
-        return isset($name) && !empty($name) && isset($email) && !empty($email) && isset($password) && !empty($password);
     }
 
     public function getExistingUser($name, $email)
@@ -85,7 +77,7 @@ class AuthController
                     session_start();
                     $_SESSION['NAME'] = $user_db->name;
                     //$_SESSION['LAST_ACTIVITY'] = time();
-                    $this->getWelcomeUser($user_db->name);
+                    $this->showLogInForm($user_db->name);
                 } else
                     $this->getLogin('', 'Invalid password');
             } else
@@ -104,8 +96,13 @@ class AuthController
         // $this->view->renderSignup($this->allTickets, $this->ticketsData, $this->quantityTicketsByCategory, $message);
     }
 
-    public function getWelcomeUser($userName)
+    public function showSignUpForm($userName)
     {
-        $this->view->renderWelcomeHome($userName, "private");
+        $this->view->renderAuthForm($userName, "signup");
+    }
+
+    public function showLogInForm($userName)
+    {
+        $this->view->renderAuthForm($userName, "login");
     }
 }
