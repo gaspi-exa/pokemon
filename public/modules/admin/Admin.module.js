@@ -12,7 +12,7 @@ class AdminModule {
     const success = new Success();
     this.$root.appendChild(success.getSuccess());
     this.$root.onclick = () => {
-      window.open(EModules.PUBLIC, "_self");
+      window.open(EModules.HOME, "_self");
     };
   };
 

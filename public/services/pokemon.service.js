@@ -1,14 +1,4 @@
 class PokemonService {
-  pokemonsList = [];
-
-  constructor() {}
-
-  onInit = () => {
-    this.getPokemons().then((next) => {
-      this.setPokemonsList(next);
-    });
-  };
-
   getPokemons = async () => {
     try {
       const resp = await fetch(
@@ -29,14 +19,6 @@ class PokemonService {
       console.error("Error fetching pokemons:", error);
       return [];
     }
-  };
-
-  setPokemonsList = (next) => {
-    this.pokemonsList = next;
-  };
-
-  getPokemonsList = () => {
-    return this.pokemonsList;
   };
 }
 

@@ -4,11 +4,10 @@ import EUserStatus from "../../constants/user-status.js";
 class AuthModule {
   $root;
   $userStatus;
-  $isRegistered;
 
   constructor(root, userStatus) {
+    this.$root = root;
     this.$userStatus = userStatus;
-    this.setRoot(root);
   }
 
   onInit = () => {
@@ -31,10 +30,6 @@ class AuthModule {
     form.setMethod("post");
     this.$root.appendChild(form.getform());
   };
-
-  setRoot(root) {
-    this.$root = root;
-  }
 }
 
 export default AuthModule;
