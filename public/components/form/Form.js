@@ -3,7 +3,8 @@ import EUserStatus from "../../constants/user-status.js";
 import Input from "./Input.js";
 import Button from "./Button.js";
 import EModules from "../../constants/route.js";
-import Pokemon from "../pokemon/Pokemon.js";
+import EPokemon from "../../constants/pokemon.js";
+import PokemonService from "../../services/pokemon.service.js";
 
 class Form {
   $form = document.createElement("form");
@@ -16,7 +17,11 @@ class Form {
   $inputsQuantity = 0;
   $buttons = [];
 
+  $service;
+  $pokemonSelected;
+
   constructor(userStatus, isRegistered) {
+    this.$service = new PokemonService();
     this.$userStatus = userStatus;
     this.$isRegistered = isRegistered;
     this.$inputsQuantity = this.$isRegistered ? 2 : 4;
@@ -40,16 +45,14 @@ class Form {
             input.setName("name");
             break;
           case 1:
-            {
-              if (this.$userStatus === EUserStatus.UNREGISTERED) {
-                input.setPlaceholder("EMAIL");
-                input.setType("email");
-                input.setName("email");
-              } else if (this.$userStatus === EUserStatus.LOGGED_OUT) {
-                input.setPlaceholder("PASSWORD");
-                input.setType("password");
-                input.setName("password");
-              }
+            if (this.$userStatus === EUserStatus.UNREGISTERED) {
+              input.setPlaceholder("EMAIL");
+              input.setType("email");
+              input.setName("email");
+            } else if (this.$userStatus === EUserStatus.LOGGED_OUT) {
+              input.setPlaceholder("PASSWORD");
+              input.setType("password");
+              input.setName("password");
             }
             break;
           case 2:
@@ -155,14 +158,12 @@ class Form {
   };
 
   setBackground = () => {
-    const pokemon = new Pokemon({
-      _id: 25,
-      name: "pikachu",
-      url: "https://wallpapers-clan.com/wp-content/uploads/2023/11/cute-pokemon-pikachu-rain-desktop-wallpaper-preview.jpg",
+    this.$service.getPokemons().then((next) => {
+      this.$pokemonSelected = next.find((pok) => pok.name === EPokemon.MEWTWO);
+      this.$form.style.backgroundImage = `url(${this.$pokemonSelected?.url})`;
+      this.$form.style.backgroundSize = "cover";
+      this.$form.style.backgroundPosition = "center";
     });
-    this.$form.style.backgroundImage = `url(${pokemon.getUrl()})`;
-    this.$form.style.backgroundSize = "cover";
-    this.$form.style.backgroundPosition = "center";
   };
 }
 
