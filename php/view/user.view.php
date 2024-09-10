@@ -12,9 +12,8 @@ class UserView
         $this->smarty = new Smarty();
     }
 
-    public function renderAuthForm($userName, $root)
+    public function renderAuthForm($root)
     {
-        $this->smarty->assign('userName', $userName);
         $this->smarty->assign('root', $root);
         $this->smarty->display('templates/index.tpl');
     }

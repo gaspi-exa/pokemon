@@ -35,7 +35,6 @@ class AuthController
 
             if (!$this->getExistingUser($name, $email)) {
                 echo 'User already exist';
-                // $this->getSignup('User already exist');
                 return;
             }
 
@@ -48,7 +47,6 @@ class AuthController
             return;
         }
         echo 'Input is empty!';
-        // $this->getSignup('Input is empty!');
     }
 
     public function getExistingUser($name, $email)
@@ -65,24 +63,16 @@ class AuthController
 
     public function showSignUpForm()
     {
-        $this->view->renderAuthForm(
-            $this->userName,
-            "signup",
-            // $errors,
-        );
+        $this->view->renderAuthForm("signup");
     }
 
     public function showLogInForm()
     {
-        $this->view->renderAuthForm(
-            $this->userName,
-            "login",
-            // $errors,
-        );
+        $this->view->renderAuthForm("login");
     }
 
     public function showLogOutForm()
     {
-        $this->view->renderAuthForm($this->userName, "logout");
+        $this->view->renderAuthForm("logout");
     }
 }
