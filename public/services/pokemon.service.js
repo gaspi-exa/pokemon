@@ -2,7 +2,7 @@ class PokemonService {
   getPokemons = async () => {
     try {
       const resp = await fetch(
-        `http://localhost/_TP_2024/api/pokemons/`,
+        `http://localhost/_TPWEB/api/pokemons/`,
         {
           method: "GET",
           mode: "cors",

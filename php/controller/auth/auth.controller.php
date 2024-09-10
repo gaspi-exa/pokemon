@@ -7,7 +7,7 @@ require_once 'php/view/user.view.php';
 class AuthController
 {
 
-    private $authHelper;
+    // private $authHelper;
     private $model;
     private $view;
     private $allUsers;
@@ -16,7 +16,7 @@ class AuthController
 
     public function __construct()
     {
-        $this->authHelper = new AuthHelper();
+        // // $this->authHelper = new AuthHelper();
         $this->model = new UserModel();
         $this->view = new UserView();
         $this->allUsers = $this->model->getAllUsers();
@@ -35,7 +35,7 @@ class AuthController
 
             if (!$this->getExistingUser($name, $email)) {
                 echo 'User already exist';
-                $this->getSignup('User already exist');
+                // $this->getSignup('User already exist');
                 return;
             }
 
@@ -48,7 +48,7 @@ class AuthController
             return;
         }
         echo 'Input is empty!';
-        $this->getSignup('Input is empty!');
+        // $this->getSignup('Input is empty!');
     }
 
     public function getExistingUser($name, $email)
@@ -62,52 +62,27 @@ class AuthController
         return $exist == 0;
     }
 
-    public function verifyUser()
+
+    public function showSignUpForm()
     {
-        $name = $_POST['userName'];
-        $password = $_POST['userPassword'];
-        if (
-            isset($name) && !empty($name) &&
-            isset($password) && !empty($password)
-        ) {
-            $user_db = $this->model->getUser($name);
-            if (isset($user_db) && $user_db) {
-                if (password_verify($password, $user_db->password)) {
-                    $this->userName = $name;
-                    session_start();
-                    $_SESSION['NAME'] = $user_db->name;
-                    //$_SESSION['LAST_ACTIVITY'] = time();
-                    $this->showLogInForm($user_db->name);
-                } else
-                    $this->getLogin('', 'Invalid password');
-            } else
-                $this->getLogin('User do not exist', '');
-        } else
-            $this->getLogin('Input is empty!', '');
+        $this->view->renderAuthForm(
+            $this->userName,
+            "signup",
+            // $errors,
+        );
     }
 
-    public function getLogin($msgName = null, $msgPass = null)
+    public function showLogInForm()
     {
-        // $this->view->renderLogin($this->allTickets, $this->ticketsData, $this->quantityTicketsByCategory, $msgName, $msgPass);
+        $this->view->renderAuthForm(
+            $this->userName,
+            "login",
+            // $errors,
+        );
     }
 
-    public function getSignup($message = null)
+    public function showLogOutForm()
     {
-        // $this->view->renderSignup($this->allTickets, $this->ticketsData, $this->quantityTicketsByCategory, $message);
-    }
-
-    public function showSignUpForm($userName)
-    {
-        $this->view->renderAuthForm($userName, "signup");
-    }
-
-    public function showLogInForm($userName)
-    {
-        $this->view->renderAuthForm($userName, "login");
-    }
-
-    public function showLogOutForm($userName)
-    {
-        $this->view->renderAuthForm($userName, "logout");
+        $this->view->renderAuthForm($this->userName, "logout");
     }
 }
