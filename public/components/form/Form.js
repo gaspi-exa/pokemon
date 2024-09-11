@@ -68,7 +68,7 @@ class Form {
         input.getInput().oninput = (event) => {
           if (!input.isValid()) {
             input.setValid(true);
-            input.getInput().value = event;
+            input.getInput().value = event.target.value;
           }
         };
         this.$form.appendChild(input.getInput());

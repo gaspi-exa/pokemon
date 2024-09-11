@@ -1,6 +1,6 @@
 <?php
 
-require_once 'php/db/connection.model.php';
+require_once 'php/model/connection.model.php';
 
 class UserModel
 {

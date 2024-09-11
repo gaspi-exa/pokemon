@@ -16,7 +16,7 @@ $r->addRoute('login', 'GET', 'AuthController', 'showLogInForm');
 $r->addRoute('signup', 'GET', 'AuthController', 'showSignUpForm');
 $r->addRoute('logout', 'GET', 'AuthController', 'showLogOutForm');
 
-$r->addRoute('home', 'GET', 'AuthController', 'verify');
+$r->addRoute('home', 'GET', 'PokemonController', 'getHome');
 
 // PUBLIC
 // $r->addRoute('home', 'GET', 'PokemonController', 'verifyUser');

@@ -1,6 +1,7 @@
 import Backdrop from "../../components/Backdrop.js";
 import PokemonService from "../../services/pokemon.service.js";
 import EPokemon from "../../constants/pokemon.js";
+import Arena from "../../components/arena/Arena.js";
 
 class HomeModule {
   $pokemonsList = [];
@@ -20,6 +21,8 @@ class HomeModule {
         backdrop.setImage(
           this.$pokemonsList.find((pok) => pok.name === EPokemon.MEWTWO)?.url
         );
+        const arena = new Arena(this.$pokemonsList);
+        // this.$root.appendChild(arena.getArena());
         this.$root.appendChild(backdrop.getbackdrop());
       }
     });
